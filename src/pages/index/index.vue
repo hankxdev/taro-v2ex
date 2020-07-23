@@ -7,8 +7,10 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
-import Taro from "@tarojs/taro"
+import Taro from "@tarojs/taro";
 import ThreadList from "../../components/ThreadList.vue";
+
+import API from "../../utils/api";
 
 @Component({
   components: {
@@ -19,15 +21,18 @@ export default class Index extends Vue {
   isLoading = true;
   threads = [];
 
-  async created(){
+  async created() {
     try {
-      const result = await Taro.request(
-        url: api.getLatestTopic()
-      )
-      this.isLoading = false
-      this.threads = [...result.data]
+      const result = await Taro.request({
+        url: API.getLatest(),
+      });
+      this.isLoading = false;
+      this.threads = [...result.data];
     } catch (error) {
-
+      console.log(error);
+      Taro.showToast({
+        title: "网络请求出错",
+      });
     }
   }
 }
