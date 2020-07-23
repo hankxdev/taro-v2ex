@@ -1,0 +1,13 @@
+{
+  "miniprogramRoot": "./dist",
+  "projectname": "v2ex",
+  "description": "a v2ex client",
+  "appid": "  ",
+  "setting": {
+    "urlCheck": true,
+    "es6": false,
+    "postcss": false,
+    "minified": false
+  },
+  "compileType": "wx86d5a1916c7b43a5"
+}
