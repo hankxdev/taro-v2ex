@@ -1,21 +1,36 @@
 <template>
   <view class="index">
-    <ThreadList />
+    <ThreadList :is-loading="isLoading" :threads="threads" />
   </view>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
-
+import Taro from "@tarojs/taro"
 import ThreadList from "../../components/ThreadList.vue";
 
 @Component({
   components: {
-    ThreadList
-  }
+    ThreadList,
+  },
 })
-export default class Index extends Vue {}
+export default class Index extends Vue {
+  isLoading = true;
+  threads = [];
+
+  async created(){
+    try {
+      const result = await Taro.request(
+        url: api.getLatestTopic()
+      )
+      this.isLoading = false
+      this.threads = [...result.data]
+    } catch (error) {
+
+    }
+  }
+}
 </script>
 
 <style>
