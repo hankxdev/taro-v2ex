@@ -9864,7 +9864,7 @@ vm2@^3.8.4:
   resolved "https://registry.npm.taobao.org/vm2/download/vm2-3.9.2.tgz?cache=0&sync_timestamp=1588189660233&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fvm2%2Fdownload%2Fvm2-3.9.2.tgz#a4085d2d88a808a1b3c06d5478c2db3222a9cc30"
   integrity sha1-pAhdLYioCKGzwG1UeMLbMiKpzDA=
 
-vue-class-component@^7.2.3:
+vue-class-component@^7.2.3, vue-class-component@^7.2.4:
   version "7.2.4"
   resolved "https://registry.npm.taobao.org/vue-class-component/download/vue-class-component-7.2.4.tgz#5c15cef356d7ce793aefef3b23cb5ac0df7ff62d"
   integrity sha1-XBXO81bXznk67+87I8tawN9/9i0=

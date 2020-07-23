@@ -1,21 +1,21 @@
 <template>
   <view class="index">
-    <NumberDisplay/>
-    <NumberSubmit/>
+    <ThreadList />
   </view>
 </template>
 
-<script>
-import NumberDisplay from '../../components/NumberDisplay.vue'
-import NumberSubmit from '../../components/NumberSubmit.vue'
+<script lang="ts">
+import Vue from "vue";
+import Component from "vue-class-component";
 
-export default {
-  name: 'Index',
+import ThreadList from "../../components/ThreadList.vue";
+
+@Component({
   components: {
-    NumberDisplay,
-    NumberSubmit
+    ThreadList
   }
-}
+})
+export default class Index extends Vue {}
 </script>
 
 <style>
