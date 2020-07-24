@@ -1,9 +1,11 @@
 import Vue from 'vue'
 import store from './store'
-import TaroUIVue from 'taro-ui-vue'
+import TaroUiVue from 'taro-ui-vue'
+import 'taro-ui-vue/dist/style/index.scss'
+
 
 // Vue.config.productionTip = false
-Vue.use(TaroUIVue)
+Vue.use(TaroUiVue)
 const App = new Vue({
   store,
   onShow(options) {

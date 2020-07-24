@@ -4,24 +4,24 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const state = {
-  numbers: [1, 2, 3]
+  article: {}
 }
 
 const mutations = {
-  ADD_NUMBER(state, payload) {
-    state.numbers.push(payload)
+  SET_ARTICLE(state, payload) {
+    state.article = { ...payload }
   }
 }
 
 const actions = {
-  addNumber(context, number) {
-    context.commit('ADD_NUMBER', number)
+  setArticle(context, article) {
+    context.commit('SET_ARTICLE', article)
   }
 }
 
 const getters = {
-  getNumbers(state) {
-    return state.numbers
+  getArticle(state) {
+    return state.article
   }
 }
 
