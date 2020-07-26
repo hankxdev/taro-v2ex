@@ -15,7 +15,8 @@
         </view>
       </view>
     </view>
-    <AtDivider />
+    <AtDivider :content="dividerText" :fontColor="deviderColor" :lineColor="deviderColor" />
+    <Discuss v-if="hasReply" :thread-id="article.id" :replyCount />
   </view>
 </template>
 
@@ -24,29 +25,42 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import { mapState } from "vuex";
 import { common } from "../../mixin";
+import Discuss from "../../components/Discuss.vue";
 
 @Component({
   computed: {
     ...mapState(["article"]),
   },
   mixins: [common],
+  components: {
+    Discuss,
+  },
 })
 export default class ThreadDetails extends Vue {
-  //   content: (...)
-  // content_rendered: (...)
-  // created: (...)
-  // id: (...)
-  // last_modified: (...)
-  // last_reply_by: (...)
-  // last_touched: (...)
-  // member: (...)
-  // node: Object
-  // replies: 1
-  // title: "一个奇妙的发现，手机关机久了就收不到垃圾短信了。"
-  // url: "https://www.v2ex.com/t/693197"
-
   gotoNode() {
+    // TODO implement NODE page
     const url = this.article.node.url;
+  }
+
+  gotoUser() {
+    // TODO implement user page
+    const userID = this.article.memeber.id;
+  }
+
+  get replyCount() {
+    return this.article.replies;
+  }
+
+  get hasReply() {
+    return this.replyCount > 0;
+  }
+
+  get dividerText() {
+    return this.hasReply ? `共 ${this.replyCount} 条帖子回复` : "暂无回复";
+  }
+
+  get deviderColor() {
+    return this.hasReply ? "#2d8cf0" : "#ed3f14";
   }
 }
 </script>

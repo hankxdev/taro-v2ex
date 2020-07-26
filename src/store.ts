@@ -36,20 +36,22 @@ const actions = {
   },
 
   async loadDiscuss(context, threadId: Number) {
-    let discuss = {}
+    let discusses = <any>[]
+    if (!threadId) {
+      context.commit("SET_DISCUSS", discusses)
+    }
     try {
       const result = await Taro.request({
-        url: API.getLatest(),
+        url: API.getDiscuss(threadId),
       });
-      discuss = { ...result.data }
+      discusses = [...result.data]
     } catch (error) {
       console.log(error);
       Taro.showToast({
         title: "网络请求出错",
       });
     } finally {
-
-      context.commit("SET_DISCUSS", discuss)
+      context.commit("SET_DISCUSS", discusses)
     }
   },
 

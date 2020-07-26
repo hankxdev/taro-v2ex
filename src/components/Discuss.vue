@@ -1,30 +1,52 @@
 <template>
-
+  <view>
+    <Loading v-if="isLoading" />
+    <DiscussDetails v-else v-for="discuss in discusses" :key="discuss.id" :discuss="discuss" />
+  </view>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import Component from 'vue-class-component'
+import Vue from "vue";
+import Component from "vue-class-component";
+import Loading from "./Loading.vue";
+import DiscussDetails from "./DiscussDetails.vue";
+import { mapState, mapActions } from "vuex";
 
 @Component({
-  props:{
-    threadId:{
+  props: {
+    threadId: {
       type: Number,
-      required: true
-    }
-  }
+      required: true,
+    },
+    replyCount: {
+      type: Number,
+    },
+  },
+  components: {
+    Loading,
+    DiscussDetails,
+  },
+  computed: {
+    ...mapState(["discusses"]),
+  },
+  methods: {
+    ...mapActions(["loadDiscuss"]),
+  },
 })
 export default class Discuss extends Vue {
-  mounted(){
+  isLoading = false;
 
-  }
+  async mounted() {
+    if (this.replyCount < 1) {
+      return;
+    }
 
-  loadDiscuss(){
-    
+    this.isLoading = true;
+    await this.loadDiscuss(this.threadId);
+    this.isLoading = false;
   }
 }
 </script>
 
 <style>
-
 </style>
