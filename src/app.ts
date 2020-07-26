@@ -3,10 +3,13 @@ import store from './store'
 import TaroUiVue from 'taro-ui-vue'
 import 'taro-ui-vue/dist/style/index.scss'
 
+import { common } from './mixin'
+
 
 // Vue.config.productionTip = false
 Vue.use(TaroUiVue)
 const App = new Vue({
+  mixins: [common],
   store,
   onShow(options) {
   },

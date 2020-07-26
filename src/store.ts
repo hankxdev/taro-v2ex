@@ -3,18 +3,24 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
+interface Article {
+  title: string,
+  node: string,
+}
+
 const state = {
   article: {}
 }
 
 const mutations = {
-  SET_ARTICLE(state, payload) {
+  SET_ARTICLE(state, payload: Article) {
     state.article = { ...payload }
   }
 }
 
 const actions = {
-  setArticle(context, article) {
+  setArticle(context, article: Article) {
+    console.log(article)
     context.commit('SET_ARTICLE', article)
   }
 }

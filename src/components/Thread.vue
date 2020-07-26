@@ -30,7 +30,7 @@ export default class Thread extends Vue {
   mounted() {}
 
   gotoDetail() {
-    this.setArticle(this.threads);
+    this.setArticle(this.thread);
     Taro.navigateTo({
       url: "/pages/thread/thread_details",
     });
