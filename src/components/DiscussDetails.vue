@@ -1,9 +1,23 @@
 <template>
-  <view>
-    <AtCard :isFull="true" :note="discuss.content_rendered"
-            :title="user.username" :thumb="user.avatar_mini"
-            :extra="parseDate(discuss.last_modified)"
-    ></AtCard>
+  <view class="panel__content no-padding">
+    <view class="example-item">
+      <view class="at-card at-card--full">
+        <view class="at-card__header">
+          <view class="at-card__header-thumb">
+            <view class="taro-img at-card__header-thumb-info">
+              <AtAvatar class="tiny-avatar" :image="user.avatar_mini"/>
+            </view>
+          </view>
+          <text class="at-article__info text-bolder at-card__header-title ">{{user.username}}</text>
+          <text
+            class="at-article__info taro-text at-card__header-extra ">{{timeAgo(discuss.last_modified)}}
+          </text>
+        </view>
+        <view class="at-card__content">
+          <view class="at-card__content-info" v-html="discuss.content_rendered"></view>
+        </view>
+      </view>
+    </view>
   </view>
 </template>
 
@@ -29,5 +43,24 @@
   }
 </script>
 
-<style>
+<style lang="scss">
+  .at-card__header-thumb {
+  }
+  .at-article__info{
+    color: #ccc !important;
+
+  }
+  .at-card__content-info {
+    min-height: 60px;
+  }
+    .tiny-avatar {
+    width: 32px;
+    height: 32px;
+
+    image {
+      width: 32px;
+      height: 32px;
+      display: initial;
+    }
+  }
 </style>

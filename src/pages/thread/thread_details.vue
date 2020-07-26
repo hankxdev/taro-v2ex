@@ -3,10 +3,13 @@
     <view class="at-article">
       <view class="at-article__h1">{{article.title}}</view>
       <view class="post_meta">
-        <view class="at-article__info">{{parseDate(article.created)}} by {{article.member.username}}</view>
+        <view class="at-article__info">
+          {{parseDate(article.created)}} ·
+          <text class="font-bolder" @tap="gotoUser">{{article.member.username}}</text>
+        </view>
         <view class="at-article__info">
           发布在
-          <view class="node-title" @tap="gotoNode">{{article.node.title}}</view>
+          <text class="font-underline" @tap="gotoNode">{{article.node.title}}</text>
         </view>
       </view>
       <view class="at-article__content">

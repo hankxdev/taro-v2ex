@@ -73,11 +73,6 @@
   .item-content__info-title {
     text-align: left;
   }
-  .item-thumb{
-    width: 80px !important;
-    height: 80px !important;
-  }
-
   .user-name{
     max-width: 138px;
     text-overflow: ellipsis;
