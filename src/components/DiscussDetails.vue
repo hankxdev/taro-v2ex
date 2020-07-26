@@ -1,6 +1,7 @@
 <template>
   <view>
-    <AtCard :title="discuss.memeber.username" v-html="discuss.note"/>
+    xxxx
+
   </view>
 </template>
 

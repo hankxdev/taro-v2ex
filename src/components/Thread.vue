@@ -5,7 +5,8 @@
       :note="thread.node.title"
       :extraText="thread.member.username"
       :thumb="thread.member.avatar_mini"
-    ></AtListItem>
+    >
+    </AtListItem>
   </view>
 </template>
 

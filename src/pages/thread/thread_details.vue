@@ -16,7 +16,7 @@
       </view>
     </view>
     <AtDivider :content="dividerText" :fontColor="deviderColor" :lineColor="deviderColor" />
-    <Discuss v-if="hasReply" :thread-id="article.id" :replyCount />
+    <Discuss v-if="hasReply" :thread-id="article.id" :replyCount="replyCount" />
   </view>
 </template>
 

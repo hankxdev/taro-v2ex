@@ -1,7 +1,9 @@
 <template>
   <view>
     <Loading v-if="isLoading" />
-    <DiscussDetails v-else v-for="discuss in discusses" :key="discuss.id" :discuss="discuss" />
+    <view v-else>
+      <DiscussDetails v-for="d in discusses" :key="d.id" :discuss="d" />
+    </view>
   </view>
 </template>
 
