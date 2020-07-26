@@ -1,18 +1,16 @@
 <template>
   <view>
     <Loading v-if="isLoading" />
-    <view v-else>
-      <DiscussDetails v-for="d in discusses" :key="d.id" :discuss="d" />
-    </view>
+       <DiscussDetails v-else v-for="d in discusses" :key="d.id" :discuss="d" />
   </view>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
-import Loading from "./Loading.vue";
-import DiscussDetails from "./DiscussDetails.vue";
-import { mapState, mapActions } from "vuex";
+import Vue from 'vue'
+import Component from 'vue-class-component'
+import Loading from './Loading.vue'
+import DiscussDetails from './DiscussDetails.vue'
+import { mapState, mapActions } from 'vuex'
 
 @Component({
   props: {
@@ -29,23 +27,23 @@ import { mapState, mapActions } from "vuex";
     DiscussDetails,
   },
   computed: {
-    ...mapState(["discusses"]),
+    ...mapState(['discusses']),
   },
   methods: {
-    ...mapActions(["loadDiscuss"]),
-  },
+    ...mapActions(['loadDiscuss']),
+  }
 })
 export default class Discuss extends Vue {
-  isLoading = false;
+  isLoading = false
 
   async mounted() {
     if (this.replyCount < 1) {
-      return;
+      return
     }
 
-    this.isLoading = true;
-    await this.loadDiscuss(this.threadId);
-    this.isLoading = false;
+    this.isLoading = true
+    await this.loadDiscuss(this.threadId)
+    this.isLoading = false
   }
 }
 </script>

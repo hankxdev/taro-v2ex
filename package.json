@@ -40,6 +40,7 @@
     "@tarojs/taro": "3.0.5",
     "tailwindcss": "^1.5.2",
     "taro-ui-vue": "^0.0.9",
+    "timeago.js": "^4.0.2",
     "vue": "^2.5.0",
     "vue-class-component": "^7.2.4",
     "vue-template-compiler": "^2.5.0",
