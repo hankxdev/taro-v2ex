@@ -1,18 +1,21 @@
 <template>
-  <view class="at-article">
-    <view class="at-article__h1">{{article.title}}</view>
-    <view class="post_meta">
-      <view class="at-article__info">{{parseDate(article.created)}} by {{article.member.username}}</view>
-      <view class="at-article__info">
-        发布在
-        <view class="node-title" @tap="gotoNode">{{article.node.title}}</view>
+  <view>
+    <view class="at-article">
+      <view class="at-article__h1">{{article.title}}</view>
+      <view class="post_meta">
+        <view class="at-article__info">{{parseDate(article.created)}} by {{article.member.username}}</view>
+        <view class="at-article__info">
+          发布在
+          <view class="node-title" @tap="gotoNode">{{article.node.title}}</view>
+        </view>
+      </view>
+      <view class="at-article__content">
+        <view class="at-article__section">
+          <view class="at-article__p" v-html="article.content_rendered"></view>
+        </view>
       </view>
     </view>
-    <view class="at-article__content">
-      <view class="at-article__section">
-        <view class="at-article__p" v-html="article.content_rendered"></view>
-      </view>
-    </view>
+    <AtDivider />
   </view>
 </template>
 
@@ -20,13 +23,13 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import { mapState } from "vuex";
-import {common} from '../../mixin'
+import { common } from "../../mixin";
 
 @Component({
   computed: {
     ...mapState(["article"]),
   },
-  mixins: [common]
+  mixins: [common],
 })
 export default class ThreadDetails extends Vue {
   //   content: (...)

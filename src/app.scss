@@ -1,0 +1,26 @@
+.full-heigth {
+  height: 100vh;
+}
+.full-width {
+  width: 100vw;
+}
+.d-flex {
+  display: flex;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.align-items-center {
+  align-items: center;
+  margin-top: -180px; // to fix the top bar height
+}
+
+.justify-content-center {
+  justify-content: center;
+}

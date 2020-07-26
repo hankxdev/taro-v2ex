@@ -4,6 +4,7 @@ import TaroUiVue from 'taro-ui-vue'
 import 'taro-ui-vue/dist/style/index.scss'
 
 import { common } from './mixin'
+import "./app.scss"
 
 
 // Vue.config.productionTip = false

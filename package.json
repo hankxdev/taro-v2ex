@@ -38,6 +38,7 @@
     "@tarojs/components": "3.0.5",
     "@tarojs/runtime": "3.0.5",
     "@tarojs/taro": "3.0.5",
+    "tailwindcss": "^1.5.2",
     "taro-ui-vue": "^0.0.9",
     "vue": "^2.5.0",
     "vue-class-component": "^7.2.4",
