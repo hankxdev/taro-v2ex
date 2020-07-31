@@ -10,21 +10,23 @@ import Component from 'vue-class-component'
 import { mapState, mapActions } from 'vuex'
 import { common } from '../../mixin'
 import ThreadList from '../../components/ThreadList.vue'
+import NavBar from '../../components/NavBar.vue'
 
 @Component({
   computed: {
     ...mapState(['hotThreads']),
   },
-  methods:{
-    ...mapActions(['loadHotThreads'])
-  }
+  methods: {
+    ...mapActions(['loadHotThreads']),
+  },
   mixins: [common],
   components: {
     ThreadList,
+    NavBar,
   },
 })
 export default class Hot extends Vue {
-  created(){
+  created() {
     this.loadHotThreads()
   }
 }

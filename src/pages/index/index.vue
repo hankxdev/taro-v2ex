@@ -2,6 +2,7 @@
   <view class="index">
     <Loading v-if="isLoading" />
     <ThreadList :threads="threads" v-else />
+    <NavBar/>
   </view>
 </template>
 
@@ -11,11 +12,13 @@ import Component from "vue-class-component";
 import ThreadList from "../../components/ThreadList.vue";
 import Loading from "../../components/Loading.vue";
 import { mapActions, mapState } from "vuex";
+import NavBar from '../../components/NavBar.vue'
 
 @Component({
   components: {
     ThreadList,
     Loading,
+    NavBar
   },
   methods: {
     ...mapActions(["loadThreads"]),

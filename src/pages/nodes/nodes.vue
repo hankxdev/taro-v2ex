@@ -1,5 +1,8 @@
 <template>
-  <view></view>
+  <view>
+    Node List
+    <NavBar />
+  </view>
 </template>
 
 <script lang="ts">
@@ -7,15 +10,14 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { mapState } from 'vuex'
 import { common } from '../../mixin'
-import Discuss from '../../components/Discuss.vue'
-
+import NavBar from '../../components/NavBar.vue'
 @Component({
   computed: {
     ...mapState(['article']),
   },
   mixins: [common],
   components: {
-    Discuss,
+    NavBar,
   },
 })
 export default class Hot extends Vue {}
