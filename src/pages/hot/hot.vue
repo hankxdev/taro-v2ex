@@ -1,6 +1,8 @@
 <template>
   <view>
-    <ThreadList :threads="hotThreads" />
+    <Loading v-if="loading" />
+    <ThreadList v-else :threads="threads" />
+    <NavBar :activeId="1" />
   </view>
 </template>
 
@@ -11,10 +13,11 @@ import { mapState, mapActions } from 'vuex'
 import { common } from '../../mixin'
 import ThreadList from '../../components/ThreadList.vue'
 import NavBar from '../../components/NavBar.vue'
+import Loading from '../../components/Loading.vue'
 
 @Component({
   computed: {
-    ...mapState(['hotThreads']),
+    ...mapState(['threads', 'loading']),
   },
   methods: {
     ...mapActions(['loadHotThreads']),
@@ -23,11 +26,15 @@ import NavBar from '../../components/NavBar.vue'
   components: {
     ThreadList,
     NavBar,
+    Loading,
   },
 })
 export default class Hot extends Vue {
-  created() {
-    this.loadHotThreads()
+  isLoading = false
+  async created() {
+    this.isLoading = true
+    await this.loadHotThreads()
+    this.isLoading = false
   }
 }
 </script>

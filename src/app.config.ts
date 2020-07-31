@@ -1,11 +1,10 @@
 export default {
   pages: [
     'pages/index/index',
-    'pages/thread/thread_details',
     'pages/hot/hot',
+    'pages/nodes/nodes',
+    'pages/thread/thread_details',
     'pages/node_detail/node_detail',
-    'pages/nodes/nodes'
-
   ],
   // tabBar: {
   //   list: [

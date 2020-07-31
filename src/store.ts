@@ -18,6 +18,7 @@ const state = {
   userProfile: {},
   nodes: [],
   nodeDetail: {},
+  loading: false
 }
 
 const mutations = {
@@ -38,109 +39,82 @@ const mutations = {
   },
   SET_NODE(state, payload) {
     state.nodeDetail = payload
+  },
+  SET_LOADING(state, payload) {
+    state.loading = payload
   }
 }
 
 const actions = {
+
   setArticle(context, article: Article) {
     context.commit('SET_ARTICLE', article)
   },
 
-  async loadDiscuss(context, threadId: number) {
-    let discusses = <any>[]
-    if (!threadId) {
-      context.commit('SET_DISCUSS', discusses)
-    }
-    try {
-      const result = await Taro.request({
-        url: API.getDiscuss(threadId),
-      })
-      console.log(result)
-      discusses = [...result.data]
-    } catch (error) {
-      console.log(error)
+  async callAPI(context, payload) {
+    const { url, mutation } = payload
+    context.commit('SET_LOADING', true)
+    Taro.request({ url }).then(result => {
+      context.commit(mutation, result.data)
+    }).catch(e => {
+      console.log(e)
       Taro.showToast({
         title: '网络请求出错',
       })
-    } finally {
-      context.commit('SET_DISCUSS', discusses)
-    }
+    }).finally(() => {
+      context.commit('SET_LOADING', false)
+    })
   },
 
-  /**
-   * get threads list
-   * @param context
-   * @param url api url
-   */
-  async loadThreads(context, url) {
-    let threads = <any>[]
-    try {
-      const result = await Taro.request({
-        url
-      })
-      threads = [...result.data]
-    } catch (error) {
-      console.log(error)
-      Taro.showToast({
-        title: '网络请求出错',
-      })
-    } finally {
-      context.commit('SET_THREADS', threads)
+  async loadThreads(context, payload) {
+    context.commit("SET_THREADS", [])
+    let url = API.getLatest()
+    const { name, nodeId, username } = payload // note that noteId and username won't be there at the same time
+    switch (name) {
+      case 'hot':
+        url = API.getHotThreads()
+        break;
+      case 'node':
+        url = API.getNodeThreadList(nodeId)
+        break;
+      case 'user':
+        url = API.getNodeThreadList(username)
+        break;
     }
+    context.dispatch('callAPI', { url, mutation: "SET_THREADS" })
   },
-  /**
-   * call apis that returns json object
-   * @param context
-   * @param url api url
-   * @param mutation mutation name to commit
-   */
-
-  async loadDetails(context, url: string, mutation: string) {
-    let obj = {}
-    try {
-      const result = await Taro.request({
-        url
-      })
-      obj = { ...result.data }
-    } catch (error) {
-      console.log(error)
-      Taro.showToast({
-        title: '网络请求出错',
-      })
-    } finally {
-      context.commit(mutation, obj)
-    }
-  },
-
 
   async loadRecentThreads(context) {
-    context.dispatch('loadThreads', API.getLatest)
+    context.dispatch('loadThreads', {})// default to load index
   },
 
   async loadHotThreads(context) {
-    context.dispatch('loadThreads', API.getHotThreads)
+    context.dispatch('loadThreads', { name: "hot" })
   },
 
   async loadNodeThreads(context, nodeId: number) {
-    context.dispatch('loadThreads', API.getNodeThreadList(nodeId))
+    context.dispatch('loadThreads', { name: "node", nodeId })
   },
+
   async loadUserThreads(context, username: string) {
-    context.dispatch('loadThreads', API.getUserThreadList(username))
+    context.dispatch('loadThreads', { name: "user", username })
   },
 
   async loadNodeList(context) {
-    context.dispatch('loadDetails', API.getNodeList, "SET_NODE_LIST")
+    context.dispatch('callAPI', API.getNodeList(), "SET_NODE_LIST")
   },
 
-  async loadNodeDetail(context) {
-    context.dispatch('loadDetails', API.getNodeDetail, "SET_NODE_DETAIL")
+  async loadNodeDetail(context, nodeId: number) {
+    context.dispatch('callAPI', API.getNodeDetail(nodeId), "SET_NODE_DETAIL")
   },
 
-  async loadUserProfile(context) {
-    context.dispatch("loadDetails", API.getUserProfile, "SET_USER_PROFILE")
+  async loadUserProfile(context, userId: number) {
+    context.dispatch("callAPI", API.getUserProfile(userId), "SET_USER_PROFILE")
   },
 
-
+  async loadDiscuss(context, threadId: number) {
+    context.dispatch('callAPI', API.getDiscuss(threadId), "SET_DISCUSS")
+  },
 }
 
 const getters = {

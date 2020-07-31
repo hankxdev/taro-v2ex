@@ -1,45 +1,43 @@
 <template>
   <view class="index">
-    <Loading v-if="isLoading" />
+    <Loading v-if="loading" />
     <ThreadList :threads="threads" v-else />
-    <NavBar/>
+    <NavBar :activeId="0" />
   </view>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
-import ThreadList from "../../components/ThreadList.vue";
-import Loading from "../../components/Loading.vue";
-import { mapActions, mapState } from "vuex";
+import Vue from 'vue'
+import Component from 'vue-class-component'
+import ThreadList from '../../components/ThreadList.vue'
+import Loading from '../../components/Loading.vue'
+import { mapActions, mapState } from 'vuex'
 import NavBar from '../../components/NavBar.vue'
 
 @Component({
   components: {
     ThreadList,
     Loading,
-    NavBar
+    NavBar,
   },
   methods: {
-    ...mapActions(["loadThreads"]),
+    ...mapActions(['loadRecentThreads']),
   },
   computed: {
-    ...mapState(["threads"]),
+    ...mapState(['threads', 'loading']),
   },
 })
 export default class Index extends Vue {
-  isLoading = true;
+  isLoading = true
   async mounted() {
-    this.isLoading  = true
-    await this.loadThreads();
-    this.isLoading = false
+    await this.loadRecentThreads()
   }
 }
 </script>
 
 <style>
 .index {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
