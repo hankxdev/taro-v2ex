@@ -1,7 +1,8 @@
 <template>
   <view>
     <Loading v-if="isLoading" />
-       <DiscussDetails v-else v-for="d in discusses" :key="d.id" :discuss="d" />
+    <DiscussDetails v-else v-for="d in discusses" :key="d.id" :discuss="d" />
+    <AtDivider v-if="discusses.length>0" :content="下面没有了" />
   </view>
 </template>
 
@@ -31,7 +32,7 @@ import { mapState, mapActions } from 'vuex'
   },
   methods: {
     ...mapActions(['loadDiscuss']),
-  }
+  },
 })
 export default class Discuss extends Vue {
   isLoading = false

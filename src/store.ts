@@ -101,19 +101,19 @@ const actions = {
   },
 
   async loadNodeList(context) {
-    context.dispatch('callAPI', API.getNodeList(), "SET_NODE_LIST")
+    context.dispatch('callAPI', { url: API.getNodeList(), mutation: "SET_NODE_LIST" })
   },
 
   async loadNodeDetail(context, nodeId: number) {
-    context.dispatch('callAPI', API.getNodeDetail(nodeId), "SET_NODE_DETAIL")
+    context.dispatch('callAPI', { url: API.getNodeDetail(nodeId), mutation: "SET_NODE_DETAIL" })
   },
 
   async loadUserProfile(context, userId: number) {
-    context.dispatch("callAPI", API.getUserProfile(userId), "SET_USER_PROFILE")
+    context.dispatch("callAPI", { url: API.getUserProfile(userId), mutation: "SET_USER_PROFILE" })
   },
 
   async loadDiscuss(context, threadId: number) {
-    context.dispatch('callAPI', API.getDiscuss(threadId), "SET_DISCUSS")
+    context.dispatch('callAPI', { url: API.getDiscuss(threadId), mutation: "SET_DISCUSS" })
   },
 }
 
@@ -121,6 +121,38 @@ const getters = {
   getArticle(state) {
     return state.article
   },
+  sortedNodes(state) {
+    const { nodes } = state
+    // return nodes.sort((a, b) => b.topics - a.topics)
+    const treeNodes = {}
+    nodes.forEach(node => {
+      let { parent_node_name } = node
+      if (!parent_node_name) {
+        parent_node_name = "UNKOWN"
+      }
+      if (node.root) {
+        let { name } = node
+        if (!name) {
+          name = "UNKOWN"
+        }
+        if (!treeNodes.hasOwnProperty[name]) {
+          treeNodes[node.name] = node
+          return
+        }
+        treeNodes[node.name] = { ...treeNodes[node.name], ...node }
+        return
+      }
+      if (!treeNodes.hasOwnProperty(parent_node_name)) {
+        treeNodes[parent_node_name] = { nodes: [node] }
+        return
+      }
+      if (!treeNodes[parent_node_name].nodes) {
+        treeNodes[parent_node_name].nodes = []
+      }
+      treeNodes[parent_node_name].nodes.push(node)
+    })
+    return treeNodes
+  }
 }
 
 export default new Vuex.Store({

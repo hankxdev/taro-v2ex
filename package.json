@@ -55,6 +55,7 @@
     "@types/webpack-env": "^1.13.6",
     "@typescript-eslint/eslint-plugin": "^2.x",
     "@typescript-eslint/parser": "^2.x",
+    "@vue/devtools": "^5.3.3",
     "babel-preset-taro": "3.0.5",
     "eslint": "^6.8.0",
     "eslint-config-taro": "3.0.5",

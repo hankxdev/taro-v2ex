@@ -2,7 +2,7 @@
   <view>
     <Loading v-if="loading" />
     <view v-else class="node-list">
-      <AtTag v-for="node in node-list" :key="node.id" onclick="gotoNodeThreads">{{node.name}}</AtTag>
+      <NodeDetail v-for="node in sortedNodes" :key="node.id" :node="node" />
     </view>
     <NavBar :activeId="2" />
   </view>
@@ -11,12 +11,15 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapGetters } from 'vuex'
 import { common } from '../../mixin'
 import NavBar from '../../components/NavBar.vue'
+import Loading from '../../components/Loading.vue'
+import NodeDetail from '../../components/NodeDetail.vue'
 @Component({
   computed: {
-    ...mapState(['nodes', 'loading']),
+    ...mapState(['loading']),
+    ...mapGetters(['sortedNodes']),
   },
   methods: {
     ...mapActions(['loadNodeList']),
@@ -24,9 +27,14 @@ import NavBar from '../../components/NavBar.vue'
   mixins: [common],
   components: {
     NavBar,
+    Loading,
+    NodeDetail,
   },
 })
 export default class Hot extends Vue {
+  created() {
+    this.loadNodeList()
+  }
   gotoNodeThreads() {}
 }
 </script>
