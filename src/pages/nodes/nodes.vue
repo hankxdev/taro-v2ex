@@ -1,9 +1,18 @@
 <template>
   <view>
     <Loading v-if="loading" />
-    <view v-else class="node-list">
-      <NodeDetail v-for="node in sortedNodes" :key="node.id" :node="node" />
-    </view>
+    <!-- <view v-else class="node-list">
+      <NodeItem v-for="node in sortedNodes" :key="node.id" :node="node" />
+    </view>-->
+    <virtual-list
+      v-else
+      :height="500"
+      :item-data="sortedNodes"
+      :item-count="sortedNodes.length"
+      :item-size="100"
+      :item="nodeItem"
+      width="100%"
+    />
     <NavBar :activeId="2" />
   </view>
 </template>
@@ -15,7 +24,7 @@ import { mapState, mapActions, mapGetters } from 'vuex'
 import { common } from '../../mixin'
 import NavBar from '../../components/NavBar.vue'
 import Loading from '../../components/Loading.vue'
-import NodeDetail from '../../components/NodeDetail.vue'
+import NodeItem from '../../components/NodeItem.vue'
 @Component({
   computed: {
     ...mapState(['loading']),
@@ -28,14 +37,20 @@ import NodeDetail from '../../components/NodeDetail.vue'
   components: {
     NavBar,
     Loading,
-    NodeDetail,
+    NodeItem,
+    // Row
   },
 })
 export default class Hot extends Vue {
   created() {
     this.loadNodeList()
   }
-  gotoNodeThreads() {}
+  get nodeItem() {
+    return NodeItem
+  }
+  get screenHeight() {
+    return window.innerHeight
+  }
 }
 </script>
 

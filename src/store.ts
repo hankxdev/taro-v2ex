@@ -123,29 +123,34 @@ const getters = {
   },
   sortedNodes(state) {
     const { nodes } = state
-    // return nodes.sort((a, b) => b.topics - a.topics)
+    return nodes.sort((a, b) => b.topics - a.topics)
     const treeNodes = {}
     nodes.forEach(node => {
-      let { parent_node_name } = node
-      if (!parent_node_name) {
-        parent_node_name = "UNKOWN"
-      }
-      if (node.root) {
-        let { name } = node
+      let { parent_node_name, name } = node
+      //node with sub nodes
+      // only v2ex's node.root is true
+      if (node.root || !parent_node_name) {
+
         if (!name) {
           name = "UNKOWN"
         }
-        if (!treeNodes.hasOwnProperty[name]) {
-          treeNodes[node.name] = node
+        if (!treeNodes.hasOwnProperty(name)) {
+          treeNodes[name] = node
           return
         }
-        treeNodes[node.name] = { ...treeNodes[node.name], ...node }
+        treeNodes[name] = { ...treeNodes[name], ...node }
         return
       }
       if (!treeNodes.hasOwnProperty(parent_node_name)) {
         treeNodes[parent_node_name] = { nodes: [node] }
         return
       }
+
+      //also a sub node with sub node, don't know how much layers
+      if (treeNodes.hasOwnProperty(name)) {
+        treeNodes[name] = { ...treeNodes[name], ...node }
+      }
+
       if (!treeNodes[parent_node_name].nodes) {
         treeNodes[parent_node_name].nodes = []
       }
