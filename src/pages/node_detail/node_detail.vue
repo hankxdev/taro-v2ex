@@ -1,26 +1,39 @@
 <template>
-  <view>
-    节点详情
+  <Loading v-if="loading" />
+  <view v-else>
+    <AtDivider color="red" v-if="threads.length < 1" content="你来到了无贴区" />
+    <ThreadList v-else :threads="threads" />
   </view>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import { common } from '../../mixin'
-import Discuss from '../../components/Discuss.vue'
+import ThreadList from '../../components/ThreadList.vue'
+import Loading from '../../components/Loading.vue'
+import { getCurrentInstance } from '@tarojs/taro'
 
 @Component({
   computed: {
-    ...mapState(['article']),
+    ...mapState(['loading', 'threads']),
   },
   mixins: [common],
   components: {
-    Discuss,
+    ThreadList,
+    Loading
+  },
+  methods: {
+    ...mapActions(['loadNodeThreads']),
   },
 })
-export default class NodeDetail extends Vue {}
+export default class NodeDetail extends Vue {
+  created() {
+    const { nodeId } = getCurrentInstance().router.params
+    this.loadNodeThreads(nodeId)
+  }
+}
 </script>
 
 <style lang="scss">

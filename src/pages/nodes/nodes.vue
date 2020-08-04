@@ -1,15 +1,12 @@
 <template>
   <view>
     <Loading v-if="loading" />
-    <!-- <view v-else class="node-list">
-      <NodeItem v-for="node in sortedNodes" :key="node.id" :node="node" />
-    </view>-->
     <virtual-list
       v-else
-      :height="500"
+      :height="screenHeight"
       :item-data="sortedNodes"
       :item-count="sortedNodes.length"
-      :item-size="100"
+      :item-size="20"
       :item="nodeItem"
       width="100%"
     />
@@ -49,7 +46,7 @@ export default class Hot extends Vue {
     return NodeItem
   }
   get screenHeight() {
-    return window.innerHeight
+    return this.sortedNodes.length * 20
   }
 }
 </script>

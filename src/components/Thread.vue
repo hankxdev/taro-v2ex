@@ -4,7 +4,7 @@
       <view class="at-list__item-container">
         <view class="at-list__item-thumb item-thumb">
           <view class="taro-img item-thumb__info">
-            <AtAvatar size="small" :image="user.avatar_mini"/>
+            <AtAvatar size="small" :image="user.avatar_large"/>
           </view>
         </view>
         <view class="at-list__item-content item-content">

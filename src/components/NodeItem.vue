@@ -1,21 +1,13 @@
 <template>
-  <!-- <AtAccordion
-    :title="node.name"
-    :open="ifOpen"
-    :onClick="expandOrGotoDetails()"
-    :note="getNodeInfo(node)"
-  >-->
-  <!-- <AtList :hasBorder="false"> -->
   <view>
     <AtListItem
       :key="node.id"
       :title="node.name"
       :note="getNodeInfo(node)"
-      :thumb="node.avatar_mini"
+      :thumb="node.avatar_large"
+      :onClick="gotoNodeDetail"
     />
   </view>
-  <!-- </AtList> -->
-  <!-- </AtAccordion> -->
 </template>
 
 <script lang="ts">
@@ -42,27 +34,12 @@ export default class NodeItem extends Vue {
 
   getNodeInfo(node) {
     const { topics, stars } = node
-    //what
     let note = `主题: ${topics} 星标:${stars}`
-    // // parent node
-    // if (node.nodes) {
-    //   const subNodeLen = node.nodes.length
-    //   note += ` 子节点:${subNodeLen}`
-    // }
     return note
   }
-
-  expandOrGotoDetails() {
-    this.expandTree = !this.expandTree
-    if (!this.node.notes) {
-      this.gotoNodeDetail(this.node)
-    }
-  }
-
-  gotoNodeDetail(note) {
-    const { name } = note
+  gotoNodeDetail() {
     Taro.navigateTo({
-      url: `pages/node_detail/node_detail/:${name}`,
+      url: `/pages/node_detail/node_detail?nodeId=${this.node.id}`,
     })
   }
 }

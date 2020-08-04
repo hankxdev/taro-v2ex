@@ -2,7 +2,7 @@
   <view>
     <Loading v-if="isLoading" />
     <DiscussDetails v-else v-for="d in discusses" :key="d.id" :discuss="d" />
-    <AtDivider v-if="discusses.length>0" :content="下面没有了" />
+    <AtDivider v-if="discusses.length>0" color="gray" content="下面没有了" />
   </view>
 </template>
 
