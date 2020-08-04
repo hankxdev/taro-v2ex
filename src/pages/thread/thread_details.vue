@@ -24,15 +24,16 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
-import { mapState } from "vuex";
-import { common } from "../../mixin";
-import Discuss from "../../components/Discuss.vue";
+import Vue from 'vue'
+import Component from 'vue-class-component'
+import { mapState } from 'vuex'
+import { common } from '../../mixin'
+import Discuss from '../../components/Discuss.vue'
+import Taro from '@tarojs/taro'
 
 @Component({
   computed: {
-    ...mapState(["article"]),
+    ...mapState(['article']),
   },
   mixins: [common],
   components: {
@@ -41,29 +42,33 @@ import Discuss from "../../components/Discuss.vue";
 })
 export default class ThreadDetails extends Vue {
   gotoNode() {
-    // TODO implement NODE page
-    const url = this.article.node.url;
+    const id = this.article.node.id
+    Taro.navigateTo({
+      url: `/pages/node_detail/node_detail?nodeId=${id}`,
+    })
   }
 
   gotoUser() {
-    // TODO implement user page
-    const userID = this.article.memeber.id;
+    const username = this.article.member.username
+    Taro.navigateTo({
+      url: `/pages/user_threads/index?name=${username}`,
+    })
   }
 
   get replyCount() {
-    return this.article.replies;
+    return this.article.replies
   }
 
   get hasReply() {
-    return this.replyCount > 0;
+    return this.replyCount > 0
   }
 
   get dividerText() {
-    return this.hasReply ? `共 ${this.replyCount} 条帖子回复` : "暂无回复";
+    return this.hasReply ? `共 ${this.replyCount} 条帖子回复` : '暂无回复'
   }
 
   get deviderColor() {
-    return this.hasReply ? "#2d8cf0" : "#ed3f14";
+    return this.hasReply ? '#2d8cf0' : '#ed3f14'
   }
 }
 </script>

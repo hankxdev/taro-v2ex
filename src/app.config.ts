@@ -5,6 +5,8 @@ export default {
     'pages/nodes/nodes',
     'pages/thread/thread_details',
     'pages/node_detail/node_detail',
+    'pages/user_threads/index',
+
   ],
   // tabBar: {
   //   list: [

@@ -78,7 +78,7 @@ const actions = {
         url = API.getNodeThreadList(nodeId)
         break;
       case 'user':
-        url = API.getNodeThreadList(username)
+        url = API.getUserThreadList(username)
         break;
     }
     context.dispatch('callAPI', { url, mutation: "SET_THREADS" })
