@@ -2,7 +2,7 @@
 	"miniprogramRoot": "dist/",
 	"projectname": "taro-v2ex",
 	"description": "a v2ex client",
-	"appid": "wx86d5a1916c7b43a5",
+	"appid": "",
 	"setting": {
 		"urlCheck": true,
 		"es6": false,
@@ -32,7 +32,7 @@
 		"packNpmManually": false,
 		"packNpmRelationList": []
 	},
-	"compileType": "wx86d5a1916c7b43a5",
+	"compileType": "˙",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"condition": {}
