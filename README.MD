@@ -1,8 +1,7 @@
 
 # Taro + Taro-UI + Vue + V2EX API 多端小程序
 
-如题，这是一个使用了这几个技术的项目。我是第一次使用Taro和写微信小程序。Taro官方有个5分钟上手项目，使用的也是V2EX的API，这个项目基本上是照着那个教程做的。
-
+如题，这是一个使用了这几个技术的练习项目。我是第一次使用Taro和写微信小程序。Taro官方有个[渐进式教程](https://taro-docs.jd.com/taro/docs/guide/)，使用的也是V2EX的API。
 ## 技术栈：
 - [Taro](https://github.com/NervJS/taro)
 - [Taro-UI](https://github.com/NervJS/taro-ui)
