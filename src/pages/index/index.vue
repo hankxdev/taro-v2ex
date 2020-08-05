@@ -30,7 +30,6 @@ import Taro from '@tarojs/taro'
 })
 export default class Index extends Vue {
   created() {
-    Taro.hideTabBar()
   }
   mounted() {
     this.loadRecentThreads()

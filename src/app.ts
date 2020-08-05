@@ -3,6 +3,7 @@ import store from './store'
 import TaroUiVue from 'taro-ui-vue'
 import 'taro-ui-vue/dist/style/index.scss'
 import VirtualList from '@tarojs/components/virtual-list'
+import Taro from '@tarojs/taro'
 
 import { common } from './mixin'
 import "./app.scss"
@@ -14,8 +15,8 @@ Vue.use(VirtualList)
 const App = new Vue({
   mixins: [common],
   store,
-  onShow(options) {
-    console.log(options)
+  onLaunch() {
+    Taro.hideTabBar()
   },
   render(h) {
     // this.$slots.default 是将要会渲染的页面

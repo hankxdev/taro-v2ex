@@ -11,12 +11,15 @@ export default {
   tabBar: {
     list: [
       {
+        icon: '',
         pagePath: 'pages/index/index',
         text: '最新'
       }, {
+        icon: '',
         pagePath: 'pages/hot/hot',
         text: '热门'
       }, {
+        icon: '',
         pagePath: 'pages/nodes/nodes',
         text: '节点'
       }
@@ -33,6 +36,5 @@ export default {
     navigationBarTitleText: 'WeChat',
     navigationBarTextStyle: 'black',
     enablePullDownRefresh: true,
-    navigationStyle: 'custom'
   }
 }
