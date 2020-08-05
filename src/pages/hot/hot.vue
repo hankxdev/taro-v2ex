@@ -14,6 +14,7 @@ import { common } from '../../mixin'
 import ThreadList from '../../components/ThreadList.vue'
 import NavBar from '../../components/NavBar.vue'
 import Loading from '../../components/Loading.vue'
+import Taro from '@tarojs/taro'
 
 @Component({
   computed: {
@@ -31,10 +32,9 @@ import Loading from '../../components/Loading.vue'
 })
 export default class Hot extends Vue {
   isLoading = false
-  async created() {
-    this.isLoading = true
-    await this.loadHotThreads()
-    this.isLoading = false
+  created() {
+    Taro.hideTabBar()
+    this.loadHotThreads()
   }
 }
 </script>

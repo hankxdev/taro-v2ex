@@ -18,7 +18,8 @@ const state = {
   userProfile: {},
   nodes: [],
   nodeDetail: {},
-  loading: false
+  loading: false,
+  navIndex: 0
 }
 
 const mutations = {
@@ -42,10 +43,17 @@ const mutations = {
   },
   SET_LOADING(state, payload) {
     state.loading = payload
+  },
+  SET_NAV_INDEX(state, index) {
+    state.navIndex = index
   }
 }
 
 const actions = {
+
+  setNavIndex(context, index: Number) {
+    context.commit('SET_NAV_INDEX', index)
+  },
 
   setArticle(context, article: Article) {
     context.commit('SET_ARTICLE', article)

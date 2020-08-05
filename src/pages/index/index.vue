@@ -13,6 +13,7 @@ import ThreadList from '../../components/ThreadList.vue'
 import Loading from '../../components/Loading.vue'
 import { mapActions, mapState } from 'vuex'
 import NavBar from '../../components/NavBar.vue'
+import Taro from '@tarojs/taro'
 
 @Component({
   components: {
@@ -28,6 +29,9 @@ import NavBar from '../../components/NavBar.vue'
   },
 })
 export default class Index extends Vue {
+  created() {
+    Taro.hideTabBar()
+  }
   mounted() {
     this.loadRecentThreads()
   }

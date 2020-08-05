@@ -60,7 +60,6 @@
       Taro.navigateTo({
         url: "/pages/thread/thread_details",
       });
-      console.log(this.thread);
     }
   }
 </script>
