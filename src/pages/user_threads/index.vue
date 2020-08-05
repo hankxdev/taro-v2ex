@@ -1,7 +1,22 @@
 <template>
   <Loading v-if="loading" />
   <view v-else>
-    <AtDivider color="red" v-if="threads.length < 1" content="这个人很懒， 啥也没发" />
+    <view class="at-article">
+      <view class="at-article__h1">
+        <AtAvatar :image="user.avatar_large" size="large" />
+        {{user.username}}
+      </view>
+      <view class="at-article__info">{{user.id}}</view>
+      <view class="at-article__content">
+        <view class="at-article__section">
+          <view class="at-article__h3">{{user.bio}}</view>
+          <view class="at-article__p" v-if="user.location">城市: {{user.location}}</view>
+          <view class="at-article__p" v-if="user.github">Github: {{user.github}}</view>
+          <view class="at-article__p" v-if="user.website">Website: {{user.website}}</view>
+        </view>
+      </view>
+    </view>
+    <AtDivider fontColor="red" v-if="threads.length < 1" content="这个人很懒， 啥也没发" />
     <ThreadList v-else :threads="threads" />
   </view>
 </template>
@@ -17,33 +32,30 @@ import { getCurrentInstance } from '@tarojs/taro'
 
 @Component({
   computed: {
-    ...mapState(['loading', 'threads']),
+    ...mapState(['loading', 'threads', 'userProfile']),
   },
   mixins: [common],
   components: {
     ThreadList,
-    Loading
+    Loading,
   },
   methods: {
-    ...mapActions(['loadUserThreads']),
+    ...mapActions(['loadUserThreads', 'loadUserProfile']),
   },
 })
 export default class NodeDetail extends Vue {
   created() {
-    const { name } = getCurrentInstance().router.params
+    const { name, id } = getCurrentInstance().router.params
+    console.log(getCurrentInstance())
     this.loadUserThreads(name)
+    this.loadUserProfile(id)
+  }
+
+  get user() {
+    return this.userProfile
   }
 }
 </script>
 
 <style lang="scss">
-.post_meta {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-
-  .node-title {
-    display: inline-block;
-  }
-}
 </style>

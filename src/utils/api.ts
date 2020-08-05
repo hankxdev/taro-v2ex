@@ -24,7 +24,6 @@ const API = {
   getUserThreadList(name: string): string {
     return `${this.baseURL}topics/show.json?username=${name}`
   }
-
 }
 
 export default API

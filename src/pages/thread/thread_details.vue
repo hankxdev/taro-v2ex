@@ -49,9 +49,9 @@ export default class ThreadDetails extends Vue {
   }
 
   gotoUser() {
-    const username = this.article.member.username
+    const { username, id } = this.article.member
     Taro.navigateTo({
-      url: `/pages/user_threads/index?name=${username}`,
+      url: `/pages/user_threads/index?name=${username}&id=${id}`,
     })
   }
 

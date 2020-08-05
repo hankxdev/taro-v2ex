@@ -1,6 +1,6 @@
 <template>
   <view>
-    <Loading v-if="isLoading" />
+    <Loading v-if="loading" />
     <DiscussDetails v-else v-for="d in discusses" :key="d.id" :discuss="d" />
     <AtDivider v-if="discusses.length>0" fontColor="gray" lineColor="gray" content="下面没有了" />
   </view>
@@ -28,7 +28,7 @@ import { mapState, mapActions } from 'vuex'
     DiscussDetails,
   },
   computed: {
-    ...mapState(['discusses']),
+    ...mapState(['discusses', 'loading']),
   },
   methods: {
     ...mapActions(['loadDiscuss']),
@@ -37,14 +37,11 @@ import { mapState, mapActions } from 'vuex'
 export default class Discuss extends Vue {
   isLoading = false
 
-  async mounted() {
+  mounted() {
     if (this.replyCount < 1) {
       return
     }
-
-    this.isLoading = true
-    await this.loadDiscuss(this.threadId)
-    this.isLoading = false
+    this.loadDiscuss(this.threadId)
   }
 }
 </script>

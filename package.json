@@ -2,7 +2,7 @@
   "name": "v2ex",
   "version": "1.0.0",
   "private": true,
-  "description": "a v2ex client",
+  "description": "another v2ex client",
   "templateInfo": {
     "name": "vuex",
     "typescript": true,

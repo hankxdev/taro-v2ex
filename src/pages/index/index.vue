@@ -28,9 +28,14 @@ import NavBar from '../../components/NavBar.vue'
   },
 })
 export default class Index extends Vue {
-  isLoading = true
-  async mounted() {
-    await this.loadRecentThreads()
+  mounted() {
+    this.loadRecentThreads()
+  }
+  onShow() {
+    console.log("I'm showing")
+  }
+  onPullDownRefresh() {
+    console.log('you pull me down')
   }
 }
 </script>
