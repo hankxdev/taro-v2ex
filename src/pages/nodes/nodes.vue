@@ -22,7 +22,6 @@ import { common } from '../../mixin'
 import NavBar from '../../components/NavBar.vue'
 import Loading from '../../components/Loading.vue'
 import NodeItem from '../../components/NodeItem.vue'
-import Taro from '@tarojs/taro'
 @Component({
   computed: {
     ...mapState(['loading']),
@@ -40,8 +39,7 @@ import Taro from '@tarojs/taro'
   },
 })
 export default class Hot extends Vue {
-  created() {
-     Taro.hideTabBar()
+  mounted() {
     this.loadNodeList()
   }
   get nodeItem() {

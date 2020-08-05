@@ -1,7 +1,7 @@
 <template>
   <view class="index">
     <Loading v-if="loading" />
-    <ThreadList :threads="threads" v-else />
+    <ThreadList :threads="recentThreads" v-else />
     <NavBar :activeId="0" />
   </view>
 </template>
@@ -13,7 +13,6 @@ import ThreadList from '../../components/ThreadList.vue'
 import Loading from '../../components/Loading.vue'
 import { mapActions, mapState } from 'vuex'
 import NavBar from '../../components/NavBar.vue'
-import Taro from '@tarojs/taro'
 
 @Component({
   components: {
@@ -25,20 +24,23 @@ import Taro from '@tarojs/taro'
     ...mapActions(['loadRecentThreads']),
   },
   computed: {
-    ...mapState(['threads', 'loading']),
+    ...mapState(['recentThreads', 'loading']),
   },
 })
 export default class Index extends Vue {
-  created() {
-  }
   mounted() {
     this.loadRecentThreads()
   }
+  //not working
   onShow() {
     console.log("I'm showing")
   }
+  //not working
   onPullDownRefresh() {
     console.log('you pull me down')
+  }
+  show() {
+    console.log('showing')
   }
 }
 </script>

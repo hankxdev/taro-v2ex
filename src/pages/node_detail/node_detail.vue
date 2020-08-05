@@ -1,8 +1,8 @@
 <template>
   <Loading v-if="loading" />
   <view v-else>
-    <AtDivider color="red" v-if="threads.length < 1" content="你来到了无贴区" />
-    <ThreadList v-else :threads="threads" />
+    <AtDivider color="red" v-if="nodeThreads.length < 1" content="你来到了无贴区" />
+    <ThreadList v-else :threads="nodeThreads" />
   </view>
 </template>
 
@@ -17,7 +17,7 @@ import { getCurrentInstance } from '@tarojs/taro'
 
 @Component({
   computed: {
-    ...mapState(['loading', 'threads']),
+    ...mapState(['loading', 'nodeThreads']),
   },
   mixins: [common],
   components: {

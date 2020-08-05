@@ -12,7 +12,10 @@ interface Article {
 
 const state = {
   article: {},
-  threads: [],
+  recentThreads: [],
+  nodeThreads: [],
+  userThreads: [],
+  hotThreads: [],
   currentThread: {},
   discusses: [],
   userProfile: {},
@@ -27,7 +30,19 @@ const mutations = {
     state.article = payload
   },
   SET_THREADS(state, payload) {
-    state.threads = payload
+    state.recentThreads = payload
+  },
+  SET_RECENT_THREADS(state, payload) {
+    state.recentThreads = payload
+  },
+  SET_HOT_THREADS(state, payload) {
+    state.hotThreads = payload
+  },
+  SET_NODE_THREADS(state, payload) {
+    state.nodeThreads = payload
+  },
+  SET_USER_THREADS(state, payload) {
+    state.userThreads = payload
   },
   SET_DISCUSS(state, payload) {
     state.discusses = payload
@@ -75,21 +90,24 @@ const actions = {
   },
 
   async loadThreads(context, payload) {
-    context.commit("SET_THREADS", [])
     let url = API.getLatest()
+    let mutation = "SET_RECENT_THREADS"
     const { name, nodeId, username } = payload // note that noteId and username won't be there at the same time
     switch (name) {
       case 'hot':
         url = API.getHotThreads()
+        mutation = "SET_HOT_THREADS"
         break;
       case 'node':
         url = API.getNodeThreadList(nodeId)
+        mutation = "SET_NODE_THREADS"
         break;
       case 'user':
         url = API.getUserThreadList(username)
+        mutation = "SET_USER_THREADS"
         break;
     }
-    context.dispatch('callAPI', { url, mutation: "SET_THREADS" })
+    context.dispatch('callAPI', { url, mutation })
   },
 
   async loadRecentThreads(context) {

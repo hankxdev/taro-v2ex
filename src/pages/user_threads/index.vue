@@ -16,8 +16,8 @@
         </view>
       </view>
     </view>
-    <AtDivider fontColor="red" v-if="threads.length < 1" content="这个人很懒， 啥也没发" />
-    <ThreadList v-else :threads="threads" />
+    <AtDivider fontColor="red" v-if="userThreads.length < 1" content="这个人很懒， 啥也没发" />
+    <ThreadList v-else :threads="userThreads" />
   </view>
 </template>
 
@@ -32,7 +32,7 @@ import { getCurrentInstance } from '@tarojs/taro'
 
 @Component({
   computed: {
-    ...mapState(['loading', 'threads', 'userProfile']),
+    ...mapState(['loading', 'userThreads', 'userProfile']),
   },
   mixins: [common],
   components: {

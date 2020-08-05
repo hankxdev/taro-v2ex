@@ -1,7 +1,7 @@
 <template>
   <view>
     <Loading v-if="loading" />
-    <ThreadList v-else :threads="threads" />
+    <ThreadList v-else :threads="hotThreads" />
     <NavBar :activeId="1" />
   </view>
 </template>
@@ -14,11 +14,10 @@ import { common } from '../../mixin'
 import ThreadList from '../../components/ThreadList.vue'
 import NavBar from '../../components/NavBar.vue'
 import Loading from '../../components/Loading.vue'
-import Taro from '@tarojs/taro'
 
 @Component({
   computed: {
-    ...mapState(['threads', 'loading']),
+    ...mapState(['hotThreads', 'loading']),
   },
   methods: {
     ...mapActions(['loadHotThreads']),
@@ -32,8 +31,7 @@ import Taro from '@tarojs/taro'
 })
 export default class Hot extends Vue {
   isLoading = false
-  created() {
-    Taro.hideTabBar()
+  mounted() {
     this.loadHotThreads()
   }
 }

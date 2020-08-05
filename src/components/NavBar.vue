@@ -10,7 +10,12 @@ import Taro from '@tarojs/taro'
 import { mapActions, mapState } from 'vuex'
 @Component({
   methods: {
-    ...mapActions(['setNavIndex']),
+    ...mapActions([
+      'setNavIndex',
+      'loadRecentThreads',
+      'loadHotThreads',
+      'loadNodeList',
+    ]),
   },
   computed: {
     ...mapState(['navIndex']),
@@ -27,9 +32,10 @@ export default class NavBar extends Vue {
   pageList = []
 
   switchPages(newIndex) {
-    if (this.current === newIndex) {
-      return
-    }
+    // commentted out because the onShow is not working now
+    // if (this.current === newIndex) {
+    //   return
+    // }
     this.setNavIndex(newIndex)
     const url = this.pages[newIndex]
     Taro.switchTab({
