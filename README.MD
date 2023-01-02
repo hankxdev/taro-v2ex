@@ -32,10 +32,10 @@
 - 不怎么好看。因为主要用来熟悉Taro以及微信小程序和多端小程序开发，因此并未在界面上花功夫，几乎没有怎么写样式。使用的全都是Taro-UI 默认的组件。
 - 有点卡。一方面v2ex并未提供分页的API。有些 endpoints 诸如获得节点列表、帖子列表等，都是一大堆上千条数据一下子全返回。网络慢的时候导致卡顿更加明显。
 - TypeScript 使用并不规范。我很少写 TypeScript。也一直懒得学，因此基本上都是用JavaScript 的写法在写 TypeScript。同样，写好或者学习 TypeScript 也并不是我写本项目的目的。略过。
-- CustomTabBar 的实现并不规范。现在的做法是写一个 CustomTabBar, 然后放置进每个页面中。正确的做法应该是。
-1. 在 `app.config.ts` 中的`tabList` 里，设置 `custom: true`
-2. 在 `src` 目录下新建 `custome-tab-bar` 文件夹
-3. 在 `custome-tab-bar` 下面添加 `index.js`,`index.wxml`, `index.wxss` 来自定义 tabbar 的样式和行为。 需要注意的是，这里不能直接写 `index.vue`，编译不出来的。
+- CustomTabBar 的实现并不规范。现在的做法是写一个 CustomTabBar, 然后放置进每个页面中。正确的做法应该是:
+    1. 在 `app.config.ts` 中的`tabList` 里，设置 `custom: true`
+    2. 在 `src` 目录下新建 `custome-tab-bar` 文件夹
+    3. 在 `custome-tab-bar` 下面添加 `index.js`,`index.wxml`, `index.wxss` 来自定义 tabbar 的样式和行为。 需要注意的是，这里不能直接写 `index.vue`，编译不出来的。
 
 
 
